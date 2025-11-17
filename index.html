@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Acme Consulting — Professional Solutions</title>
+    <meta
+      name="description"
+      content="Simple, clean, and professional landing page template for businesses."
+    />
+
+    <style>
+      :root {
+        --bg: #ffffff;
+        --muted: #6b7280;
+        --accent: #0f172a; /* very dark blue */
+        --primary: #0b5fff; /* blue accent for CTAs */
+        --card: #f8fafc;
+        --max-width: 1100px;
+        --radius: 10px;
+        --gap: 24px;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--accent);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.5;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: var(--max-width);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 32px;
+      }
+
+      .brand {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        text-decoration: none;
+        color: var(--accent);
+      }
+
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, var(--primary), #6b8cff);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+      }
+
+      nav a {
+        margin-left: 18px;
+        text-decoration: none;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      nav a.cta {
+        background: var(--primary);
+        color: white;
+        padding: 10px 14px;
+        border-radius: 8px;
+      }
+
+      /* Hero */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        align-items: center;
+        margin-bottom: 48px;
+      }
+
+      .hero-inner {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      h1 {
+        font-size: clamp(1.6rem, 2.6vw, 2.4rem);
+        margin: 0;
+      }
+      p.lead {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-ghost {
+        background: white;
+        border: 1px solid #e6edf9;
+        color: var(--accent);
+      }
+
+      /* Features */
+      .grid {
+        display: grid;
+        gap: var(--gap);
+      }
+      .services {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .card {
+        background: var(--card);
+        padding: 18px;
+        border-radius: 12px;
+        border: 1px solid #eef2ff;
+      }
+      .card h3 {
+        margin: 0 0 8px 0;
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      /* Why choose us */
+      .why {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .why-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+      }
+
+      /* Clients */
+      .clients {
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 12px;
+        background: #fbfbfe;
+        border-radius: 12px;
+      }
+      .client {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        background: transparent;
+        border: 1px solid transparent;
+      }
+      .client svg {
+        height: 28px;
+        width: 80px;
+        opacity: 0.85;
+      }
+
+      /* Testimonials */
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 18px;
+      }
+      .testimonial {
+        background: white;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid #eef2ff;
+      }
+      .quote {
+        font-style: italic;
+        color: var(--muted);
+      }
+
+      /* Contact */
+      .contact {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      form {
+        display: grid;
+        gap: 12px;
+      }
+      label {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      input,
+      textarea {
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #e6e9ef;
+        font-size: 1rem;
+      }
+      input:focus,
+      textarea:focus {
+        outline: 3px solid rgba(11, 95, 255, 0.12);
+        border-color: var(--primary);
+      }
+      button[type="submit"] {
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 0;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 700;
+      }
+
+      footer {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid #f0f2f6;
+        color: var(--muted);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      @media (min-width: 800px) {
+        .hero {
+          grid-template-columns: 1fr 380px;
+        }
+        .hero .panel {
+          background: var(--card);
+          padding: 20px;
+          border-radius: 12px;
+          border: 1px solid #eef2ff;
+        }
+        .contact {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container" role="main">
+      <header>
+        <a class="brand" href="#">
+          <span class="logo">AC</span>
+          <div>
+            <div style="font-weight: 700">Acme Consulting</div>
+            <div style="font-size: 0.85rem; color: var(--muted)">
+              Professional Solutions
+            </div>
+          </div>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#clients">Clients</a>
+          <a href="#contact" class="cta">Get in touch</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="hero-inner">
+          <h1>
+            Delivering clear, measurable business outcomes for modern teams
+          </h1>
+          <p class="lead">
+            We help companies streamline operations, improve customer
+            experience, and build scalable systems — with a pragmatic,
+            data-driven approach. Trusted by small businesses and enterprises
+            alike.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact"
+              >Request a consultation</a
+            >
+            <a class="btn btn-ghost" href="#services">Our services</a>
+          </div>
+
+          <div style="margin-top: 18px">
+            <div
+              class="card"
+              style="display: flex; gap: 12px; align-items: center"
+            >
+              <div style="font-weight: 700">Fast onboarding</div>
+              <div class="muted">
+                Start delivering value in weeks — not months.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="panel" aria-labelledby="contact-heading">
+          <h2 id="contact-heading" style="margin-top: 0">Quick contact</h2>
+          <p class="muted">
+            Share a few details and we'll get back within 1 business day.
+          </p>
+          <form id="quick-contact" onsubmit="return handleQuickContact(event)">
+            <label for="qname">Name</label>
+            <input id="qname" name="name" required />
+            <label for="qemail">Email</label>
+            <input id="qemail" name="email" type="email" required />
+            <label for="qmessage">Message</label>
+            <textarea id="qmessage" name="message" rows="3"></textarea>
+            <button type="submit">Send</button>
+            <div
+              id="quick-msg"
+              role="status"
+              aria-live="polite"
+              style="color: var(--muted); font-size: 0.95rem; margin-top: 8px"
+            ></div>
+          </form>
+        </aside>
+      </section>
+
+      <section
+        id="services"
+        class="grid services"
+        aria-labelledby="services-heading"
+      >
+        <h2 id="services-heading">Our services</h2>
+        <div class="card">
+          <h3>Product Strategy</h3>
+          <p class="muted">
+            Roadmapping, user research, and prioritization to align product work
+            with business goals.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Software Engineering</h3>
+          <p class="muted">
+            Scalable web applications, APIs, and integrations built with
+            maintainability in mind.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Design & UX</h3>
+          <p class="muted">
+            Human-centered design, prototyping, and usability testing to reduce
+            risk and speed delivery.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Data & Analytics</h3>
+          <p class="muted">
+            Measurement strategy, dashboards, and analytics to inform decisions
+            and measure impact.
+          </p>
+        </div>
+      </section>
+
+      <section class="why" style="margin-top: 36px">
+        <h2>Why choose us</h2>
+        <p class="muted">
+          We combine practical experience with a client-first approach to
+          deliver outcomes you can measure.
+        </p>
+        <div class="why-list">
+          <div class="card">
+            <h3>Clear timelines</h3>
+            <p class="muted">
+              Roadmaps and milestones so you always know progress and next
+              steps.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Transparent pricing</h3>
+            <p class="muted">
+              Simple engagement models with clear deliverables — no surprises.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Senior-led teams</h3>
+            <p class="muted">
+              Experienced engineers and product leads directly involved in
+              delivery.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Security & compliance</h3>
+            <p class="muted">
+              Built-in best practices for data handling and privacy.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="clients" style="margin-top: 36px">
+        <h2>Selected clients</h2>
+        <div class="clients" aria-label="Client logos">
+          <div class="client" title="Client A">
+            <!-- simple placeholder logo -->
+            <svg
+              viewBox="0 0 120 30"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Client A logo"
+            >
+              <rect width="120" height="30" rx="6" fill="#eef2ff" />
+              <text
+                x="12"
+                y="20"
+                font-family="sans-serif"
+                font-size="14"
+                fill="#0b5fff"
+              >
+                Client A
+              </text>
+            </svg>
+          </div>
+          <div class="client" title="Client B">
+            <svg
+              viewBox="0 0 120 30"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Client B logo"
+            >
+              <rect width="120" height="30" rx="6" fill="#f3f7ff" />
+              <text
+                x="12"
+                y="20"
+                font-family="sans-serif"
+                font-size="14"
+                fill="#273444"
+              >
+                Client B
+              </text>
+            </svg>
+          </div>
+          <div class="client" title="Client C">
+            <svg
+              viewBox="0 0 120 30"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Client C logo"
+            >
+              <rect width="120" height="30" rx="6" fill="#f9fbff" />
+              <text
+                x="12"
+                y="20"
+                font-family="sans-serif"
+                font-size="14"
+                fill="#334155"
+              >
+                Client C
+              </text>
+            </svg>
+          </div>
+          <div class="client" title="Client D">
+            <svg
+              viewBox="0 0 120 30"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Client D logo"
+            >
+              <rect width="120" height="30" rx="6" fill="#fff9f1" />
+              <text
+                x="12"
+                y="20"
+                font-family="sans-serif"
+                font-size="14"
+                fill="#ff7b00"
+              >
+                Client D
+              </text>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-top: 36px">
+        <h2>Testimonials</h2>
+        <div class="testimonials">
+          <div class="testimonial">
+            <div style="font-weight: 700">
+              "A true partner — delivered beyond expectations."
+            </div>
+            <div class="muted">— Priya K., Head of Product</div>
+            <p class="quote">
+              "Acme helped us reduce time-to-market and improved our onboarding
+              metrics by 32% in three months."
+            </p>
+          </div>
+          <div class="testimonial">
+            <div style="font-weight: 700">
+              "Clear, professional, and focused on results."
+            </div>
+            <div class="muted">— Rahul M., CTO</div>
+            <p class="quote">
+              "Their senior engineers integrated with our team seamlessly and
+              helped us scale a critical system."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-top: 36px">
+        <h2>Contact us</h2>
+        <div class="grid" style="grid-template-columns: 1fr; gap: 16px">
+          <div class="card">
+            <h3>Send a message</h3>
+            <form id="contact-form" onsubmit="return handleContact(event)">
+              <label for="name">Full name</label>
+              <input id="name" name="name" required />
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required />
+              <label for="company">Company (optional)</label>
+              <input id="company" name="company" />
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+              ></textarea>
+              <button type="submit">Send message</button>
+              <div
+                id="form-msg"
+                role="status"
+                aria-live="polite"
+                style="color: var(--muted); font-size: 0.95rem; margin-top: 8px"
+              ></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          © <span id="year"></span> Acme Consulting — All rights reserved.
+        </div>
+        <div style="display: flex; gap: 16px; align-items: center">
+          <div class="muted">info@acme.example</div>
+          <div class="muted">+91 90000 00000</div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      // small helpers for demo-only front-end form handling
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      function showMsg(id, text) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = text;
+      }
+
+      function handleQuickContact(e) {
+        e.preventDefault();
+        const name = e.target.name.value.trim();
+        const email = e.target.email.value.trim();
+        if (!name || !email) {
+          showMsg("quick-msg", "Please provide name and email.");
+          return false;
+        }
+        showMsg("quick-msg", "Thanks — we received your message.");
+        e.target.reset();
+        return false;
+      }
+
+      function handleContact(e) {
+        e.preventDefault();
+        const name = e.target.name.value.trim();
+        const email = e.target.email.value.trim();
+        const message = e.target.message.value.trim();
+        if (!name || !email || !message) {
+          showMsg("form-msg", "Please fill required fields.");
+          return false;
+        }
+        // In a real site, send to server. Here we just show a local confirmation.
+        showMsg(
+          "form-msg",
+          "Thank you — your message has been sent. We will reply within 1 business day."
+        );
+        e.target.reset();
+        return false;
+      }
+    </script>
+  </body>
+</html>
