@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chulbul Gifts — Checkout</title>
+<style>
+:root{--accent:#ff7ab6;--muted:#9fb3c8}
+body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#061022,#071428);color:#eaf4ff;padding:20px}
+.container{max-width:900px;margin:0 auto}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px}
+.field{display:flex;flex-direction:column;margin-bottom:10px}
+input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:#eaf4ff}
+.btn{background:linear-gradient(90deg,var(--accent),#ffa3d6);border:0;padding:10px 14px;border-radius:10px;color:#081426;font-weight:700;cursor:pointer}
+.small{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="container">
+  <header style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:800">Chulbul Gifts</div><div class="small">Checkout</div></header>
+  <main style="margin-top:12px;display:grid;grid-template-columns:2fr 1fr;gap:12px">
+    <section class="card">
+      <h3 style="margin-top:0">Shipping details</h3>
+      <form id="checkoutForm" onsubmit="return false">
+        <div class="field"><label class="small">Full name</label><input id="name" required></div>
+        <div class="field"><label class="small">Email</label><input id="email" type="email" required></div>
+        <div class="field"><label class="small">Address</label><textarea id="address"></textarea></div>
+        <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="proceed">Proceed to payment</button><div class="small" id="formNote"></div></div>
+      </form>
+    </section>
+
+    <aside class="card" id="orderSummary">
+      <h4 style="margin:0">Order summary</h4>
+      <div id="items" style="margin-top:10px"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:12px"><div class="small">Total</div><div id="total" style="font-weight:800">₹0</div></div>
+    </aside>
+  </main>
+  <footer style="margin-top:18px;text-align:center" class="small"><a href="products.html" style="color:var(--muted)">Continue shopping</a></footer>
+</div>
+
+<script>
+function loadCart(){ try{return JSON.parse(localStorage.getItem('cg_cart')||'{}')}catch(e){return{}} }
+function cartTotal(){ const c=loadCart(); return Object.values(c).reduce((s,i)=>s + i.price*i.qty,0) }
+function renderSummary(){ const c=loadCart(); const items=Object.values(c); const cont=document.getElementById('items'); cont.innerHTML=''; if(!items.length){ cont.innerHTML='<div class="small">Cart is empty</div>'; } else{ items.forEach(it=>{ const el=document.createElement('div'); el.style.display='flex'; el.style.justifyContent='space-between'; el.style.marginBottom='6px'; el.innerHTML=`<div><strong>${it.name}</strong><div class="small">₹${it.price} × ${it.qty}</div></div><div style="font-weight:700">₹${it.price*it.qty}</div>`; cont.appendChild(el); }) } document.getElementById('total').textContent = '₹' + cartTotal(); }
+
+document.getElementById('proceed').addEventListener('click', ()=>{
+  const name=document.getElementById('name').value.trim();
+  const email=document.getElementById('email').value.trim();
+  const address=document.getElementById('address').value.trim();
+  if(!name||!email){ document.getElementById('formNote').textContent = 'Please fill name & email'; setTimeout(()=>document.getElementById('formNote').textContent='',1600); return; }
+  // store customer data to localStorage and go to payment page
+  localStorage.setItem('cg_customer', JSON.stringify({name,email,address}));
+  // go to payment
+  location.href = 'payment.html';
+});
+
+renderSummary();
+</script>
+</body>
+</html>

@@ -1,52 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K5DJ5HHF');</script>
-<!-- End Google Tag Manager -->
-<meta charset="UTF-8">
-<title>Chulbul Store — Home</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chulbul Gifts — Home</title>
 <style>
-body{font-family:Arial;background:#f6f8fb;margin:0;padding:0}
-header{background:#fff;padding:15px;box-shadow:0 1px 0 #ddd}
-.container{max-width:900px;margin:auto;padding:20px}
-h1{color:#ff4d4f}
-.card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-.btn{display:inline-block;background:#ff4d4f;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none}
-.center{text-align:center}
-img{width:100%;border-radius:10px}
-footer{text-align:center;margin-top:40px;color:#555}
+/* Compact site-wide styling */
+:root{--bg:#071028;--card:#0b1220;--accent:#ff7ab6;--muted:#9fb3c8}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial;background:linear-gradient(180deg,#061022,#071428);color:#eaf4ff;padding:22px}
+.container{max-width:1100px;margin:0 auto}
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,#ffd5e8,#b6e9ff);display:grid;place-items:center;color:#071428;font-weight:800}
+nav a{color:var(--muted);text-decoration:none;margin:0 8px}
+.hero{display:flex;gap:18px;align-items:center;margin-top:18px;padding:18px;border-radius:14px;background:rgba(255,255,255,0.02)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:12px;border-radius:12px}
+.btn{background:linear-gradient(90deg,var(--accent),#ffa3d6);border:0;padding:10px 14px;border-radius:10px;color:#081426;font-weight:700;cursor:pointer}
+.small{color:var(--muted);font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.hero{flex-direction:column}}
 </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5DJ5HHF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<header>
-  <div class="container">
-    <h2>Chulbul Store</h2>
-  </div>
-</header>
-
 <div class="container">
-  <div class="card">
-    <h1>Welcome to Chulbul Store</h1>
-    <p>Shop our exclusive limited edition products.</p>
+  <header class="header">
+    <div class="brand">
+      <div class="logo">CG</div>
+      <div>
+        <div style="font-weight:700">Chulbul Gifts</div>
+        <div class="small">Birthday gifts for boyfriend & girlfriend</div>
+      </div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="checkout.html">Checkout</a>
+      <a href="payment.html">Payment</a>
+      <a href="thankyou.html">Thank you</a>
+    </nav>
+  </header>
 
-    <img src="https://via.placeholder.com/800x400/ffe9e6/111?text=Chulbul+Sneakers" alt="product">
+  <main>
+    <section class="hero">
+      <div style="flex:1">
+        <h1 style="margin:0">Make their birthday unforgettable 🎁</h1>
+        <p class="small">Curated gift boxes, keepsakes, flowers and treats — choose a heartfelt surprise.</p>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn" onclick="location.href='products.html'">Shop gifts</button>
+          <button class="btn" onclick="openCart()">Open cart (<span id="cartCount">0</span>)</button>
+        </div>
+      </div>
+      <div style="width:180px;text-align:center">
+        <div style="font-size:48px">🎂</div>
+        <div class="small">Featured</div>
+      </div>
+    </section>
 
-    <br><br>
-    <a class="btn" href="product.html">Go to Product</a>
-  </div>
+    <section style="margin-top:18px">
+      <h2 style="margin:6px 0">Top picks</h2>
+      <div class="grid" id="homeGrid"></div>
+    </section>
+
+    <footer style="margin-top:20px;text-align:center;opacity:.85" class="small">Chulbul Gifts — demo store • No real payments</footer>
+  </main>
 </div>
 
-<footer>© 2025 Chulbul Store</footer>
+<!-- Simple cart drawer -->
+<div id="cartDrawer" style="position:fixed;right:18px;top:80px;background:#071428;padding:12px;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.6);display:none;z-index:60">
+  <div style="display:flex;justify-content:space-between;align-items:center"><strong>Your cart</strong><button onclick="closeCart()" style="background:transparent;border:0;color:var(--muted);cursor:pointer">✕</button></div>
+  <div id="cartItems" style="margin-top:8px;min-width:260px"></div>
+  <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" onclick="location.href='checkout.html'">Checkout</button><button onclick="clearCart()" style="background:transparent;border:0;color:var(--muted);cursor:pointer">Clear</button></div>
+</div>
 
+<script>
+// Shared product list (kept concise)
+const PRODUCTS = [
+  {id:1,name:'Rose & Candle Box',price:899,desc:'Roses + scented candle'},
+  {id:2,name:'Custom Photo Frame',price:499,desc:'Personalized wooden frame'},
+  {id:3,name:'Chocolate Pack',price:299,desc:'Premium assorted chocolates'},
+  {id:4,name:'Couple Necklace',price:1299,desc:'Matching necklaces'},
+  {id:5,name:'Balloon Kit',price:349,desc:'Party balloons & confetti'},
+  {id:6,name:'6" Birthday Cake',price:799,desc:'Fresh bakery cake'},
+];
+
+// Cart stored in localStorage under 'cg_cart'
+function loadCart(){
+  try{ return JSON.parse(localStorage.getItem('cg_cart')||'{}') }catch(e){return{}}
+}
+function saveCart(c){ localStorage.setItem('cg_cart', JSON.stringify(c)); }
+function cartCount(){ const c=loadCart(); return Object.values(c).reduce((s,v)=>s+v.qty,0); }
+function renderCartSmall(){ const c=loadCart(); const wrapper=document.getElementById('cartItems'); wrapper.innerHTML=''; const items=Object.values(c); if(!items.length){ wrapper.innerHTML='<div style="color:var(--muted)">Cart empty</div>'; } else{ items.forEach(it=>{ const div=document.createElement('div'); div.style.display='flex'; div.style.justifyContent='space-between'; div.style.marginBottom='6px'; div.innerHTML=`<div><strong>${it.name}</strong><div class="small">₹${it.price}</div></div><div style="text-align:right">x${it.qty}</div>`; wrapper.appendChild(div); }) } document.getElementById('cartCount').textContent = cartCount(); }
+
+function addToCart(id,qty=1){ const p = PRODUCTS.find(x=>x.id===id); if(!p) return; const c=loadCart(); if(!c[id]) c[id]={id:p.id,name:p.name,price:p.price,qty:0}; c[id].qty+=qty; saveCart(c); renderCartSmall(); alert(p.name + ' added to cart'); }
+function clearCart(){ localStorage.removeItem('cg_cart'); renderCartSmall(); }
+function openCart(){ document.getElementById('cartDrawer').style.display='block'; }
+function closeCart(){ document.getElementById('cartDrawer').style.display='none'; }
+
+// render top picks
+function renderHome(){ const g=document.getElementById('homeGrid'); g.innerHTML=''; PRODUCTS.slice(0,3).forEach(p=>{ const c=document.createElement('div'); c.className='card'; c.innerHTML=`<div style="font-size:26px">🎁</div><div style="font-weight:700;margin-top:6px">${p.name}</div><div class="small">${p.desc}</div><div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div style="font-weight:800">₹${p.price}</div><div><button class="btn" onclick="addToCart(${p.id})">Add</button></div></div>`; g.appendChild(c); }) }
+
+renderHome(); renderCartSmall();
+</script>
 </body>
 </html>

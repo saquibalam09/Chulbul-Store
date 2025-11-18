@@ -1,62 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K5DJ5HHF');</script>
-<!-- End Google Tag Manager -->
-<meta charset="UTF-8">
-<title>Chulbul Store — Payment</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chulbul Gifts — Payment (Demo)</title>
 <style>
-body{font-family:Arial;background:#f6f8fb;margin:0;padding:0}
-header{background:#fff;padding:15px;box-shadow:0 1px 0 #ddd}
-.container{max-width:900px;margin:auto;padding:20px}
-.card{background:#fff;padding:20px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-h1{color:#ff4d4f}
-label{font-weight:bold}
-input{padding:10px;width:100%;border-radius:8px;border:1px solid #ccc;margin-bottom:10px}
-.btn{display:inline-block;background:#ff4d4f;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none}
-.btn.ghost{background:transparent;border:1px solid #ff4d4f;color:#ff4d4f}
-footer{text-align:center;margin-top:40px;color:#555}
+body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#061022,#071428);color:#eaf4ff;padding:20px}
+.container{max-width:700px;margin:0 auto}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:14px;border-radius:12px}
+input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:#eaf4ff}
+.btn{background:linear-gradient(90deg,#ff7ab6,#ffa3d6);border:0;padding:10px 14px;border-radius:10px;color:#081426;font-weight:700;cursor:pointer}
+.small{color:#9fb3c8}
 </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5DJ5HHF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<header>
-  <div class="container">
-    <h2>Chulbul Store</h2>
-  </div>
-</header>
-
 <div class="container">
-  <div class="card">
-    <h1>Payment</h1>
-
-    <label>Your Name</label>
-    <input type="text" placeholder="Enter your name">
-
-    <label>Email</label>
-    <input type="email" placeholder="Enter your email">
-
-    <label>Card Number</label>
-    <input type="text" placeholder="4242 4242 4242 4242">
-
-    <p><strong>Total Amount: ₹2499</strong></p>
-
-    <br>
-    <a class="btn" href="thankyou.html">Pay Now</a>
-    <a class="btn ghost" href="product.html">Back</a>
-  </div>
+  <header style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:800">Chulbul Gifts</div><div class="small">Payment (demo)</div></header>
+  <main style="margin-top:12px">
+    <section class="card">
+      <h3 style="margin-top:0">Payment details</h3>
+      <div id="summary" class="small" style="margin-bottom:8px"></div>
+      <div style="display:grid;gap:8px">
+        <input id="card" placeholder="Card number (demo)" />
+        <input id="exp" placeholder="MM/YY" />
+        <input id="cvv" placeholder="CVV" />
+        <div style="display:flex;gap:8px"><button class="btn" id="pay">Pay now</button><button onclick="location.href='checkout.html'" style="background:transparent;border:0;color:var(--muted);cursor:pointer">Back</button></div>
+        <div id="status" class="small"></div>
+      </div>
+    </section>
+  </main>
 </div>
 
-<footer>© 2025 Chulbul Store</footer>
+<script>
+function loadCart(){ try{return JSON.parse(localStorage.getItem('cg_cart')||'{}')}catch(e){return{}} }
+function cartTotal(){ const c=loadCart(); return Object.values(c).reduce((s,i)=>s + i.price*i.qty,0) }
+function render(){ const total = cartTotal(); document.getElementById('summary').textContent = 'Amount to pay: ₹' + total; if(total<=0) { alert('Cart empty — add items first'); location.href='products.html' } }
 
+function createOrder(){ const customer = JSON.parse(localStorage.getItem('cg_customer')||'{}'); const cart = loadCart(); const items = Object.values(cart).map(i=>({name:i.name,qty:i.qty,price:i.price})); const total = cartTotal(); const id = 'CG' + Math.floor(Math.random()*900000+100000); const order = {id,customer,items,total,date:new Date().toISOString()}; localStorage.setItem('cg_last_order', JSON.stringify(order)); // clear cart
+  localStorage.removeItem('cg_cart');
+  return order;
+}
+
+document.getElementById('pay').addEventListener('click', ()=>{
+  const card=document.getElementById('card').value.trim(); if(!card){ document.getElementById('status').textContent='Enter card details (demo)'; setTimeout(()=>document.getElementById('status').textContent='',1800); return; }
+  document.getElementById('pay').disabled=true; document.getElementById('status').textContent='Processing...';
+  setTimeout(()=>{ const order=createOrder(); document.getElementById('status').textContent='Payment successful ✓'; setTimeout(()=>{ location.href='thankyou.html'; },900); },1400);
+});
+
+render();
+</script>
 </body>
 </html>

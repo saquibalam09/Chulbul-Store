@@ -1,48 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-K5DJ5HHF');</script>
-<!-- End Google Tag Manager -->
-<meta charset="UTF-8">
-<title>Chulbul Store — Thank You</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Chulbul Gifts — Thank you</title>
 <style>
-body{font-family:Arial;background:#f6f8fb;margin:0;padding:0;text-align:center}
-header{background:#fff;padding:15px;box-shadow:0 1px 0 #ddd}
-.container{max-width:700px;margin:auto;padding:20px}
-.card{background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.08)}
-h1{color:#2ecc71;font-size:2rem}
-.btn{display:inline-block;background:#ff4d4f;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none}
-footer{text-align:center;margin-top:40px;color:#555}
+body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#061022,#071428);color:#eaf4ff;padding:22px}
+.container{max-width:800px;margin:0 auto;text-align:center}
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));padding:18px;border-radius:12px}
+.btn{background:linear-gradient(90deg,#ff7ab6,#ffa3d6);border:0;padding:10px 14px;border-radius:10px;color:#081426;font-weight:700;cursor:pointer}
+.small{color:#9fb3c8}
 </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5DJ5HHF"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-<header>
-  <div class="container">
-    <h2>Chulbul Store</h2>
-  </div>
-</header>
-
 <div class="container">
   <div class="card">
-    <h1>✔ Thank You!</h1>
-    <p>Your order has been placed successfully!</p>
-
-    <br>
-    <a class="btn" href="index.html">Back to Home</a>
+    <div style="font-size:48px">🎉</div>
+    <h2>Thank you — your order is confirmed (demo)</h2>
+    <div id="details" class="small" style="margin-top:8px"></div>
+    <div style="margin-top:12px;display:flex;justify-content:center;gap:8px"><button class="btn" id="download">Download receipt</button><button onclick="location.href='index.html'" style="background:transparent;border:0;color:var(--muted);cursor:pointer">Back to home</button></div>
   </div>
 </div>
 
-<footer>© 2025 Chulbul Store</footer>
+<script>
+function loadLastOrder(){ try{return JSON.parse(localStorage.getItem('cg_last_order')||'null')}catch(e){return null} }
+function downloadReceipt(order){ if(!order) return alert('No order'); let text = `Chulbul Gifts — Receipt\nOrder: ${order.id}\nDate: ${new Date(order.date).toLocaleString()}\n\nCustomer:\n${order.customer.name}\n${order.customer.email}\n\nItems:\n`; order.items.forEach(i=> text += ` - ${i.name} x${i.qty} = ₹${i.qty*i.price}\n`); text += `\nTotal: ₹${order.total}\n\n(This was a demo order)`; const blob=new Blob([text],{type:'text/plain'}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download = `receipt_${order.id}.txt`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url); }
 
+const order = loadLastOrder(); if(!order){ document.getElementById('details').textContent = 'No recent order found — maybe you visited directly.' } else{ document.getElementById('details').textContent = `Order ${order.id} • ${new Date(order.date).toLocaleString()} • ₹${order.total}` }
+
+document.getElementById('download').addEventListener('click', ()=>downloadReceipt(order));
+</script>
 </body>
 </html>
