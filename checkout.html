@@ -41,7 +41,7 @@ input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);pa
         <div class="field"><label class="small">Full name</label><input id="name" required></div>
         <div class="field"><label class="small">Email</label><input id="email" type="email" required></div>
         <div class="field"><label class="small">Address</label><textarea id="address"></textarea></div>
-        <div style="display:flex;gap:8px;align-items:center"><a class="btn" id="proceed">Proceed to payment</a><div class="small" id="formNote"></div></div>
+        <div style="display:flex;gap:8px;align-items:center"><a class="btn" id="proceed" href='https://chulbul-store.netlify.app/payment' >Proceed to payment</a><div class="small" id="formNote"></div></div>
       </form>
     </section>
 
@@ -67,7 +67,7 @@ document.getElementById('proceed').addEventListener('click', ()=>{
   // store customer data to localStorage and go to payment page
   localStorage.setItem('cg_customer', JSON.stringify({name,email,address}));
   // go to payment
-  location.href = 'https://chulbul-store.netlify.app/payment';
+  // location.href = 'https://chulbul-store.netlify.app/payment';
 });
 
 renderSummary();
