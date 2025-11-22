@@ -58,7 +58,7 @@ document.getElementById('proceed').addEventListener('click', ()=>{
   // store customer data to localStorage and go to payment page
   localStorage.setItem('cg_customer', JSON.stringify({name,email,address}));
   // go to payment
-  location.href = 'payment.html';
+  location.href = 'https://chulbul-store.netlify.app/payment';
 });
 
 renderSummary();
