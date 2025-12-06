@@ -88,6 +88,41 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
     <footer style="margin-top:20px;text-align:center;opacity:.85" class="small">Chulbul Gifts — demo store • No real payments</footer>
+     <section style="margin-top:30px">
+  <h2 style="margin:6px 0">Contact Us</h2>
+  <p class="small">Have a question or need help? Send us a message.</p>
+
+  <form id="contactForm" 
+        action="#" 
+        method="post"
+        style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;max-width:480px">
+    
+    <div style="margin-bottom:12px">
+      <label class="small">Your Name</label>
+      <input type="text" name="name" required
+             style="width:100%;padding:10px;border-radius:8px;border:1px solid #22314a;background:#0b1220;color:white">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label class="small">Email</label>
+      <input type="email" name="email" required
+             style="width:100%;padding:10px;border-radius:8px;border:1px solid #22314a;background:#0b1220;color:white">
+    </div>
+
+    <div style="margin-bottom:12px">
+      <label class="small">Message</label>
+      <textarea name="message" rows="4" required
+                style="width:100%;padding:10px;border-radius:8px;border:1px solid #22314a;background:#0b1220;color:white"></textarea>
+    </div>
+
+    <button type="submit" class="btn">Send Message</button>
+  </form>
+
+  <p id="formSuccess" class="small" style="color:#8affc1;display:none;margin-top:10px">
+    ✅ Your message has been sent!
+  </p>
+</section>
+
   </main>
 </div>
 
@@ -127,5 +162,19 @@ function renderHome(){ const g=document.getElementById('homeGrid'); g.innerHTML=
 
 renderHome(); renderCartSmall();
 </script>
+
+   <script>
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Remove this if backend added!
+  document.getElementById("formSuccess").style.display = "block";
+
+  // Event for GTM tracking
+  window.dataLayer = window.dataLayer || [];
+  dataLayer.push({
+    event: "contact_form_submit"
+  });
+});
+</script>
+
 </body>
 </html>
