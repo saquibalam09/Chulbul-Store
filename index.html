@@ -63,6 +63,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="checkout.html">Checkout</a>
       <a href="payment.html">Payment</a>
       <a href="thankyou.html">Thank you</a>
+      <a href="contact.html">Contact Us</a>
     </nav>
   </header>
 
@@ -87,16 +88,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="grid" id="homeGrid"></div>
     </section>
 
-    <footer style="margin-top:20px;text-align:center;opacity:.85" class="small">Chulbul Gifts — demo store • No real payments</footer>
      <section style="margin-top:30px">
   <h2 style="margin:6px 0">Contact Us</h2>
-  <p class="small">Have a question or need help? Send us a message.</p>
+  <p class="small">Have a question or want help? Send us a message.</p>
 
-  <form id="contactForm" 
-        action="#" 
+  <form id="contactForm"
+        action="#"
         method="post"
         style="background:rgba(255,255,255,0.03);padding:16px;border-radius:12px;max-width:480px">
-    
+
     <div style="margin-bottom:12px">
       <label class="small">Your Name</label>
       <input type="text" name="name" required
@@ -122,6 +122,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     ✅ Your message has been sent!
   </p>
 </section>
+
+
+    <footer style="margin-top:20px;text-align:center;opacity:.85" class="small">Chulbul Gifts — demo store • No real payments</footer>
+    
 
   </main>
 </div>
@@ -163,18 +167,19 @@ function renderHome(){ const g=document.getElementById('homeGrid'); g.innerHTML=
 renderHome(); renderCartSmall();
 </script>
 
-   <script>
+<script>
 document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault(); // Remove this if backend added!
+  e.preventDefault(); 
   document.getElementById("formSuccess").style.display = "block";
 
-  // Event for GTM tracking
+  // Send custom event to GTM
   window.dataLayer = window.dataLayer || [];
   dataLayer.push({
     event: "contact_form_submit"
   });
 });
 </script>
+
 
 </body>
 </html>
